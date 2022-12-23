@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../component/list/course_list.dart';
 import '../component/list/explore_course_list.dart';
 import '../component/navigation_bar.dart';
 import '../constant.dart';
+import 'continue_watching_screen.dart';
 import 'sidebar_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,9 +16,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late Animation<Offset> sidebarAnimation;
   late Animation<double> animationOpacity;
-
   late AnimationController sidebarAnimationController;
-
   var sideBarHidden = true;
 
   @override
@@ -105,6 +105,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ],
               ),
             ),
+            ContinueWatchingScreen(),
             IgnorePointer(
               ignoring: sideBarHidden,
               child: Stack(children: [
