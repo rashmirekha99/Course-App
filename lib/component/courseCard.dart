@@ -33,25 +33,34 @@ class CourseCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      cardItems.subTitle,
-                      style: ksubTitleStyle,
+                    Hero(
+                      tag: cardItems.subTitle,
+                      child: Text(
+                        cardItems.subTitle,
+                        style: ksubTitleStyle,
+                      ),
                     ),
                     SizedBox(height: 10),
-                    Text(
-                      cardItems.title,
-                      style: const TextStyle(
-                        fontSize: 21,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+                    Hero(
+                      tag: cardItems.title,
+                      child: Text(
+                        cardItems.title,
+                        style: const TextStyle(
+                          fontSize: 21,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
                 ),
                 Expanded(
-                    child: Image.asset(
-                  'asset/illustrations/${cardItems.bgImage}',
-                  fit: BoxFit.cover,
+                    child: Hero(
+                  tag: cardItems.bgImage,
+                  child: Image.asset(
+                    'asset/illustrations/${cardItems.bgImage}',
+                    fit: BoxFit.cover,
+                  ),
                 )),
               ],
             ),
@@ -62,8 +71,11 @@ class CourseCard extends StatelessWidget {
         padding: const EdgeInsets.only(right: 20.0),
         child: Container(
           padding: EdgeInsets.all(10.0),
-          child: Image.asset(
-            'asset/logos/${cardItems.logoImage}',
+          child: Hero(
+            tag: cardItems.logoImage,
+            child: Image.asset(
+              'asset/logos/${cardItems.logoImage}',
+            ),
           ),
           height: 60.0,
           width: 60.0,
