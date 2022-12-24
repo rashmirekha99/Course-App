@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SidebarItems {
@@ -33,7 +36,10 @@ var sidebaritems = [
           Color.fromARGB(255, 106, 227, 148),
           Color.fromARGB(255, 12, 216, 22),
         ]),
-    icon: const Icon(Icons.message, color: Colors.white),
+    icon: const Icon(
+      Icons.message,
+      color: Colors.white,
+    ),
   ),
   //3rd item
   SidebarItems(

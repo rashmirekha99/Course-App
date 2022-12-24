@@ -1,5 +1,7 @@
+import 'package:demo/main.dart';
 import 'package:flutter/material.dart';
 import '../../model/CardItems.dart';
+import '../../screens/course_screen.dart';
 import '../courseCard.dart';
 
 class CourseList extends StatefulWidget {
@@ -41,10 +43,22 @@ class _CourseListState extends State<CourseList> {
           width: double.infinity,
           child: PageView.builder(
             itemBuilder: (context, index) {
-              return Opacity(
-                opacity: currentPage == index ? 1.0 : 0.7,
-                child: CourseCard(
-                  cardItems: cardItems[index],
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          CourseScreen(course: cardItems[index]),
+                      fullscreenDialog: true,
+                    ),
+                  );
+                },
+                child: Opacity(
+                  opacity: currentPage == index ? 1.0 : 0.7,
+                  child: CourseCard(
+                    cardItems: cardItems[index],
+                  ),
                 ),
               );
             },

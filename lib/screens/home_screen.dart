@@ -59,51 +59,53 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         child: Stack(
           children: [
             SafeArea(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  NavBar(triggerAnimation: () {
-                    setState(() {
-                      sideBarHidden = !sideBarHidden;
-                    });
-                    sidebarAnimationController.forward();
-                  }),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 10),
-                        Text(
-                          "Recents",
-                          style: kLargeTitleStyle,
-                        ),
-                        SizedBox(height: 6),
-                        Text(
-                          "23 courses more coming",
-                          style: ksubTitleStyle,
-                        ),
-                        SizedBox(height: 20),
-                      ],
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    NavBar(triggerAnimation: () {
+                      setState(() {
+                        sideBarHidden = !sideBarHidden;
+                      });
+                      sidebarAnimationController.forward();
+                    }),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 10),
+                          Text(
+                            "Recents",
+                            style: kLargeTitleStyle,
+                          ),
+                          SizedBox(height: 6),
+                          Text(
+                            "23 courses more coming",
+                            style: ksubTitleStyle,
+                          ),
+                          SizedBox(height: 20),
+                        ],
+                      ),
                     ),
-                  ),
-                  CourseList(),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 20.0, right: 20.0, top: 25.0, bottom: 16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Explore",
-                          style: kLargeTitleStyle,
-                        ),
-                        SizedBox(height: 10),
-                      ],
+                    CourseList(),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 20.0, right: 20.0, top: 25.0, bottom: 16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Explore",
+                            style: kLargeTitleStyle,
+                          ),
+                          SizedBox(height: 10),
+                        ],
+                      ),
                     ),
-                  ),
-                  ExploreCourseList(),
-                ],
+                    ExploreCourseList(),
+                  ],
+                ),
               ),
             ),
             ContinueWatchingScreen(),

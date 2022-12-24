@@ -42,8 +42,11 @@ class _ContinueWatchListState extends State<ContinueWatchList> {
           width: double.infinity,
           child: PageView.builder(
             itemBuilder: (context, index) {
-              return ContinueWatchinCard(
-                cardItems: continueWatchingCourses[index],
+              return Opacity(
+                opacity: index == currentPage ? 1.0 : 0.7,
+                child: ContinueWatchinCard(
+                  cardItems: continueWatchingCourses[index],
+                ),
               );
             },
             itemCount: continueWatchingCourses.length,
