@@ -73,6 +73,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(height: 10),
                         Text(
                           "Recents",
                           style: kLargeTitleStyle,
@@ -82,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           "23 courses more coming",
                           style: ksubTitleStyle,
                         ),
-                        SizedBox(height: 10),
+                        SizedBox(height: 20),
                       ],
                     ),
                   ),

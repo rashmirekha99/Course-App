@@ -1,7 +1,13 @@
+import 'dart:math';
+
+import 'package:demo/model/ExploreItems.dart';
+import 'package:demo/model/continueWatching.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-
+import '../../model/continueWatching.dart';
+import '../component/list/continue_watching_list.dart';
 import '../constant.dart';
+import '../model/CardItems.dart';
 
 class ContinueWatchingScreen extends StatelessWidget {
   const ContinueWatchingScreen({Key? key}) : super(key: key);
@@ -41,11 +47,61 @@ class ContinueWatchingScreen extends StatelessWidget {
             child: Text("Continue Watching", style: kTitle2Style),
           ),
           Padding(
+            padding: EdgeInsets.symmetric(vertical: 24.0),
+            child: ContinueWatchList(),
+          ),
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 32),
             child: Text("Certificates", style: kTitle2Style),
           ),
+          CetificateViewer(),
         ],
       ),
     );
+  }
+}
+
+class CetificateViewer extends StatefulWidget {
+  const CetificateViewer({Key? key}) : super(key: key);
+
+  @override
+  State<CetificateViewer> createState() => _CetificateViewerState();
+}
+
+class _CetificateViewerState extends State<CetificateViewer> {
+  final List<String> certificatePaths = [
+    'asset/certificates/certificate-01.png',
+    'asset/certificates/certificate-02.png',
+    'asset/certificates/certificate-03.png',
+  ];
+  late Widget certificateViewer;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    List<Widget> imageChildren = [];
+    certificatePaths.reversed.toList().asMap().forEach((index, certificate) {
+      int angleDegree;
+      if (index == certificatePaths.length - 1) {
+        angleDegree = 0;
+      } else {
+        angleDegree = Random().nextInt(10) - 5;
+      }
+      imageChildren.add(Transform.rotate(
+        angle: angleDegree * (pi / 180),
+        child: Image.asset(
+          certificate,
+          alignment: Alignment.center,
+          fit: BoxFit.cover,
+        ),
+      ));
+    });
+    certificateViewer = Stack(children: imageChildren);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(padding: EdgeInsets.only(top: 20), child: certificateViewer);
   }
 }
