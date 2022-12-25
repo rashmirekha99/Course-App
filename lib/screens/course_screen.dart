@@ -12,6 +12,23 @@ class CourseScreen extends StatefulWidget {
 }
 
 class _CourseScreenState extends State<CourseScreen> {
+  Widget indicators() {
+    List<Widget> indicators = [];
+    for (var i = 0; i < 9; i++) {
+      indicators.add(Container(
+          width: 7.0,
+          height: 7.0,
+          margin: EdgeInsets.symmetric(horizontal: 6.0),
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: i == 0 ? Color(0xFF0971FE) : Color(0xFFA6AEBD))));
+    }
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: indicators,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -246,6 +263,37 @@ class _CourseScreenState extends State<CourseScreen> {
                     )
                   ],
                 ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 28.0, vertical: 24.0),
+                child: Row(children: [
+                  indicators(),
+                  Spacer(),
+                  GestureDetector(
+                    onTap: () {
+                      print("Button Preseed");
+                    },
+                    child: Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: kShadowColor,
+                              offset: Offset(0, 12),
+                              blurRadius: 16.0,
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(14.0),
+                        ),
+                        width: 80.0,
+                        height: 40.0,
+                        child: Text(
+                          "View all",
+                          style: kSearchTextStyle,
+                        )),
+                  )
+                ]),
               ),
               Padding(
                   padding: EdgeInsets.symmetric(horizontal: 28.0),

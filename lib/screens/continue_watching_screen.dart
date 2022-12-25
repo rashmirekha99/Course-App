@@ -1,13 +1,8 @@
-import 'dart:math';
-import 'package:demo/model/ExploreItems.dart';
-import 'package:demo/model/continueWatching.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import '../../model/continueWatching.dart';
 import '../component/list/certificate_viewer.dart';
 import '../component/list/continue_watching_list.dart';
 import '../constant.dart';
-import '../model/CardItems.dart';
 
 class ContinueWatchingScreen extends StatelessWidget {
   const ContinueWatchingScreen({Key? key}) : super(key: key);
@@ -54,7 +49,7 @@ class ContinueWatchingScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 32),
             child: Text("Certificates", style: kTitle2Style),
           ),
-          CetificateViewer(),
+          Expanded(child: CetificateViewer()),
         ],
       ),
     );
