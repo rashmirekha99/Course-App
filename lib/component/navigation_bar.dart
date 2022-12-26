@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'navigation_search_bar.dart';
 import 'side_bar_button.dart';
 
@@ -14,7 +13,7 @@ class NavBar extends StatelessWidget {
       padding: const EdgeInsets.only(left: 20.0, right: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children:  [
+        children: [
           SidebarButton(triggerAnimation: triggerAnimation),
           //searchbar
           Expanded(

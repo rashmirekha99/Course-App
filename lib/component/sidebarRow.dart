@@ -1,6 +1,5 @@
 import 'package:demo/constant.dart';
 import 'package:flutter/material.dart';
-
 import '../model/SidebarItem.dart';
 
 class SidebarRow extends StatelessWidget {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../model/continueWatching.dart';
 import '../card/continue_watching_card.dart';
 
