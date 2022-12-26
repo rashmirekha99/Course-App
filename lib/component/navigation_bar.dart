@@ -1,3 +1,4 @@
+import 'package:demo/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'navigation_search_bar.dart';
 import 'side_bar_button.dart';
@@ -16,18 +17,24 @@ class NavBar extends StatelessWidget {
         children: [
           SidebarButton(triggerAnimation: triggerAnimation),
           //searchbar
-          Expanded(
+          const Expanded(
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: SearchBar(),
             ),
           ),
-          SizedBox(width: 16.0),
-          Icon(Icons.notifications),
-          SizedBox(width: 16.0),
-          CircleAvatar(
-            backgroundImage: AssetImage('asset/images/profile.jpg'),
-          )
+          const SizedBox(width: 16.0),
+          const Icon(Icons.notifications),
+          const SizedBox(width: 16.0),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ProfileScreen()));
+            },
+            child: const CircleAvatar(
+              backgroundImage: AssetImage('asset/images/profile.jpg'),
+            ),
+          ),
         ],
       ),
     );
