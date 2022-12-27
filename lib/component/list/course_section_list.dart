@@ -19,7 +19,7 @@ class CourseSectionList extends StatelessWidget {
 
     cards.add(
       Padding(
-        padding:const EdgeInsets.only(bottom: 20.0),
+        padding: const EdgeInsets.only(bottom: 20.0),
         child: Text(
           "No more sections to view, look\nfor more in our courses",
           style: kCaptionLabelStyle,
