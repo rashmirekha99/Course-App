@@ -56,8 +56,11 @@ class _CourseListState extends State<CourseList> {
                 },
                 child: Opacity(
                   opacity: currentPage == index ? 1.0 : 0.7,
-                  child: CourseCard(
-                    cardItems: cardItems[index],
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 20.0),
+                    child: CourseCard(
+                      cardItems: cardItems[index],
+                    ),
                   ),
                 ),
               );
