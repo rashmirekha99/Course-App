@@ -1,4 +1,5 @@
 import 'package:demo/constant.dart';
+import 'package:demo/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -9,6 +10,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  late String email;
+  late String password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           "Log in to",
                           style: kTitle1Style,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 7,
                         ),
                         Text(
@@ -70,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           style:
                               kTitle1Style.copyWith(color: Color(0xFF5B4CF0)),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         Container(
@@ -88,17 +91,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                           blurRadius: 16.0)
                                     ]),
                                 child: Column(
-                                  children: const [
+                                  children: [
                                     //email
                                     Padding(
-                                      padding: EdgeInsets.only(
+                                      padding: const EdgeInsets.only(
                                         top: 5.0,
                                         right: 16.0,
                                         left: 16.0,
                                       ),
                                       child: TextField(
                                         cursorColor: kPrimaryLabelColor,
-                                        decoration: InputDecoration(
+                                        decoration: const InputDecoration(
                                           border: InputBorder.none,
                                           hintText: 'Email Address',
                                           icon: Icon(
@@ -107,12 +110,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                             size: 20.0,
                                           ),
                                         ),
+                                        onChanged: (enteredText) {
+                                          email = enteredText;
+                                          print(email);
+                                        },
                                       ),
                                     ),
-                                    Divider(),
+                                    const Divider(),
                                     //password field
                                     Padding(
-                                      padding: EdgeInsets.only(
+                                      padding: const EdgeInsets.only(
                                         top: 5.0,
                                         right: 16.0,
                                         left: 16.0,
@@ -120,7 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       child: TextField(
                                         cursorColor: kPrimaryLabelColor,
                                         obscureText: true,
-                                        decoration: InputDecoration(
+                                        decoration: const InputDecoration(
                                           border: InputBorder.none,
                                           hintText: 'Password',
                                           icon: Icon(
@@ -129,6 +136,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                             size: 20.0,
                                           ),
                                         ),
+                                        onChanged: (enteredText) {
+                                          password = enteredText;
+                                          print(password);
+                                        },
                                       ),
                                     ),
                                   ],
@@ -142,24 +153,32 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         Row(
                           children: [
-                            Container(
-                              alignment: Alignment.center,
-                              child: Text(
-                                "Login",
-                                style: kCalloutLabelStyle.copyWith(
-                                    color: Colors.white),
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(14.0),
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Color(0xFF73A0F4),
-                                    Color(0xFF74A47F5),
-                                  ],
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HomeScreen()));
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "Login",
+                                  style: kCalloutLabelStyle.copyWith(
+                                      color: Colors.white),
                                 ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(14.0),
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Color(0xFF73A0F4),
+                                      Color(0xFF74A47F5),
+                                    ],
+                                  ),
+                                ),
+                                height: 47.0,
+                                width: MediaQuery.of(context).size.width * 0.3,
                               ),
-                              height: 47.0,
-                              width: MediaQuery.of(context).size.width * 0.3,
                             ),
                           ],
                         ),
