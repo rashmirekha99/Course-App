@@ -173,15 +173,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                       await _auth
                                           .createUserWithEmailAndPassword(
                                               email: email, password: password)
-                                          .then(
-                                            (user) => Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    HomeScreen(),
-                                              ),
-                                            ),
-                                          );
+                                          .then((user) {
+                                        user.user?.sendEmailVerification();
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => HomeScreen(),
+                                          ),
+                                        );
+                                      });
                                     } catch (err) {}
                                   } else {
                                     showDialog(
@@ -227,10 +227,34 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(
                           height: 15.0,
                         ),
-                        Container(
-                          child: Text("Forgot Password?",
-                              style: kCalloutLabelStyle.copyWith(
-                                  color: Color(0x721B1E9C))),
+                        GestureDetector(
+                          onTap: () {
+                            _auth
+                                .sendPasswordResetEmail(email: email)
+                                .then((value) {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Text('Email Sent!'),
+                                      content: Text(
+                                          "The password reset has been sent!"),
+                                      actions: [
+                                        ElevatedButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text('Ok'))
+                                      ],
+                                    );
+                                  });
+                            });
+                          },
+                          child: Container(
+                            child: Text("Forgot Password?",
+                                style: kCalloutLabelStyle.copyWith(
+                                    color: Color(0x721B1E9C))),
+                          ),
                         )
                       ],
                     ),
