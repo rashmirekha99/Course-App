@@ -29,9 +29,17 @@ class ExploreCourseCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(course.courseSubtitle, style: kCardSubtitleStyle),
+                      Text(
+                        course.courseSubtitle,
+                        style: kCardSubtitleStyle,
+                      ),
                       SizedBox(height: 6),
-                      Text(course.courseTitle, style: kCardTitleStyle),
+                      Text(
+                        course.courseTitle,
+                        style: kCardTitleStyle,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ],
                   ),
                 ),
