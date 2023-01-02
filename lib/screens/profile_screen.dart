@@ -15,10 +15,10 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   List<String> badges = [
-    'badge-01.png',
-    'badge-02.png',
-    'badge-03.png',
-    'badge-04.png',
+    // 'badge-01.png',
+    // 'badge-02.png',
+    // 'badge-03.png',
+    // 'badge-04.png',
   ];
 
   final _firestore = FirebaseFirestore.instance;
@@ -32,6 +32,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     loadUserData();
+    loadBadges();
   }
 
 //update data
@@ -69,6 +70,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
         name = snapshot.data()?['name'];
         bio = snapshot.data()?['bio'];
       });
+    });
+  }
+
+  //get badge data and add it to the list
+  void loadBadges() {
+    _firestore
+        .collection('users')
+        .doc(_auth.currentUser?.uid)
+        .get()
+        .then((snapshot) {
+      for (var badge in snapshot.data()?["badges"]) {
+        setState(() {
+          badges.add(badge);
+        });
+      }
     });
   }
 
@@ -141,7 +157,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     context: context,
                                     builder: (context) {
                                       return AlertDialog(
-                                       
                                         title: Text('Edit Details'),
                                         content: Container(
                                           child: Column(
