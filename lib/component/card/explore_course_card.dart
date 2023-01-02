@@ -1,10 +1,36 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import '../../constant.dart';
 import '../../model/ExploreItems.dart';
 
-class ExploreCourseCard extends StatelessWidget {
+class ExploreCourseCard extends StatefulWidget {
   ExploreCourseCard({required this.course});
   final Course course;
+
+  @override
+  State<ExploreCourseCard> createState() => _ExploreCourseCardState();
+}
+
+class _ExploreCourseCardState extends State<ExploreCourseCard> {
+  final _storage = FirebaseStorage.instance;
+  String illustrationurl = '';
+  void getIllustration() {
+    _storage
+        .ref('illustrations/${widget.course.illustration}')
+        .getDownloadURL()
+        .then((url) {
+      setState(() {
+        illustrationurl = url;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getIllustration();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +42,7 @@ class ExploreCourseCard extends StatelessWidget {
           height: 120.0,
           width: 280.0,
           decoration: BoxDecoration(
-            gradient: course.background,
+            gradient: widget.course.background,
           ),
           child: Padding(
             padding: EdgeInsets.only(
@@ -30,12 +56,12 @@ class ExploreCourseCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        course.courseSubtitle,
+                        widget.course.courseSubtitle,
                         style: kCardSubtitleStyle,
                       ),
                       SizedBox(height: 6),
                       Text(
-                        course.courseTitle,
+                        widget.course.courseTitle,
                         style: kCardTitleStyle,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -46,11 +72,13 @@ class ExploreCourseCard extends StatelessWidget {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Image.asset(
-                      'asset/illustrations/${course.illustration}',
-                      fit: BoxFit.cover,
-                      height: 100.0,
-                    )
+                    illustrationurl == ''
+                        ? Container()
+                        : Image.network(
+                            '${illustrationurl}',
+                            fit: BoxFit.cover,
+                            height: 100.0,
+                          )
                   ],
                 )
               ],

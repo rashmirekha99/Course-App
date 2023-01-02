@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../component/list/certificate_viewer.dart';
@@ -14,15 +15,10 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  List<String> badges = [
-    // 'badge-01.png',
-    // 'badge-02.png',
-    // 'badge-03.png',
-    // 'badge-04.png',
-  ];
+  var badges = [];
 
   final _firestore = FirebaseFirestore.instance;
-
+  final _storage = FirebaseStorage.instance;
   final _auth = FirebaseAuth.instance;
 
   var name = 'loading...';
@@ -81,8 +77,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
         .get()
         .then((snapshot) {
       for (var badge in snapshot.data()?["badges"]) {
-        setState(() {
-          badges.add(badge);
+        _storage.ref("badges/$badge").getDownloadURL().then((url) {
+          setState(() {
+            badges.add(url);
+            print(url);
+          });
         });
       }
     });
@@ -325,8 +324,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   blurRadius: 18.0,
                                 )
                               ]),
-                              child:
-                                  Image.asset('asset/badges/${badges[index]}'),
+                              child: Image.network('${badges[index]}'),
                             );
                           },
                         ),

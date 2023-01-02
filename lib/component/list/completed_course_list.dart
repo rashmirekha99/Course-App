@@ -1,7 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/model/completedCourse.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../card/completed_course_card.dart';
-
 
 class CompletedCourseList extends StatefulWidget {
   const CompletedCourseList({Key? key}) : super(key: key);
@@ -11,8 +12,50 @@ class CompletedCourseList extends StatefulWidget {
 }
 
 class _CompletedCourseListState extends State<CompletedCourseList> {
+  final _firestore = FirebaseFirestore.instance;
+  final _auth = FirebaseAuth.instance;
+
   List<Container> indicators = [];
   int currentPage = 0;
+  var completedCourses = [];
+  @override
+  void initState() {
+    super.initState();
+    getCompletedCourses();
+  }
+
+  void getCompletedCourses() {
+    _firestore
+        .collection('users')
+        .doc(_auth.currentUser?.uid)
+        .get()
+        .then((snapshot) {
+      for (var course in snapshot.data()?['completed']) {
+        print(course);
+        _firestore
+            .collection('courses')
+            .doc(course)
+            .get()
+            .then((courseSnapshot) {
+          setState(() {
+            print(courseSnapshot["courseTitle"]);
+            completedCourses.add(CompletedCourse(
+                courseTitle: courseSnapshot["courseTitle"],
+                courseSubtitle: courseSnapshot["courseSubtitle"],
+                background: LinearGradient(colors: [
+                  Color(
+                    int.parse(courseSnapshot["color"][0]),
+                  ),
+                  Color(
+                    int.parse(courseSnapshot["color"][1]),
+                  ),
+                ]),
+                illustration: courseSnapshot["illustration"]));
+          });
+        });
+      }
+    });
+  }
 
   Widget updateIndicator() {
     return Row(
